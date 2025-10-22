@@ -1,3 +1,7 @@
+// GROUP MEMBERS:
+// MOAYAD ABDULLAH BADAHDAH ---- 446108721
+// SULTAN KHALID ALSANIE ---- 446108708
+
 import java.util.Scanner;
 public class LibrarySimulator {
     public static void main(String[] args) {
