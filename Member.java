@@ -1,6 +1,7 @@
 // GROUP MEMBERS:
 // MOAYAD ABDULLAH BADAHDAH ---- 446108721
 // SULTAN KHALID ALSANIE ---- 446108708
+// GITHUB REP: https://github.com/vorw/KingSaudUniversityJavaProject
 import java.util.Scanner;
 public class Member {
       
@@ -16,69 +17,83 @@ public class Member {
     public static int TotalBorrows;// the number of times the borrow book operation was used.
     public static int TotalReturns;// the number of times the return book operation was used.
 
-    public void Member(int id, String name,int borrowedCount ) {
-    	
+    public Member(int id, String name,int borrowedCount) {
+    	this.id = id;
+        this.name = name;
+        this.borrowedCount = borrowedCount;
     	}
-    private void canBorrow(){
-    
-    if (Borrowed<5&&this.Borrowed>-1)
-         System.out.println("you can borrow books");
-    else 
-    	 System.out.println("you can't borrow books more than 5");	
-    }//Checks if the member can borrow more books.
-    private void canReturn(){
-    	
-    	  if (Borrowed>=1)
-    	         System.out.println("you can return books");
-    	    else 
-    	    	 System.out.println("you can't return books becuase you don,t have books already");	
-    	        
-   
-    		}//Checks if the member can return a book
-    
-    public void viewBorrowedCount() {
-    	 
-    	System.out.println(Borrowed);
-    	
-    }//Prints the member’s current borrowed book count.
-    public void borrowOne(){
-    	Scanner input = new Scanner(System.in);
-    	int return_books = input.nextInt();
-        Borrowed - this.return_books;
-    System.out.print(Borrowed);
-    	input.close();//close input
-    }// Simulates borrowing a book. A fee of 0.50 credit is charged and added to TotalRevenue.
-    public void returnOne(){
-    	Scanner input = new Scanner(System.in);
-    	int return_books = input.nextInt();
-        Borrowed - this.return_books;
-    System.out.print(Borrowed);//close input
-    }//Simulates returning a book. No fee is charged.
-    
-    public void displayStatistics() {
-    	
-    	System.out.println(borrowedCount);
-    }//Prints the member’s session statistics.
-    public void  reset() {
-    	
-    	
-    }//Resets the statistics to zero.
-   public void Setters() {
-	   
-	   
-   }
-    
-    
-    
-    
-    public void getters() {
-    	
-    	
+
+    private boolean canBorrow() { //Checks if the member can borrow more books not exceeding 5.
+        if (borrowedCount < 5 && borrowedCount >= 0)
+            return true;
+        else 
+        {
+            return false;
+        }
+    }
+
+    private boolean canReturn() { //Checks if the member can return a book.
+        if (borrowedCount >= 1)
+            return true;
+        else
+        {
+            return false;
+        }
     }
     
+    public void viewBorrowedCount() { //Prints the member’s current borrowed book count.
+        System.out.print(borrowedCount);
+        numViewBorrowed++;
+        TotalViewBorrowed++;
+    }
+
+    public boolean borrowOne() { // Simulates borrowing a book. A fee of 0.50 credit is charged and added to TotalRevenue.
+        if (canBorrow()) {
+            TotalBorrows++;
+            borrowedCount++;
+            numBorrows++;
+            sessionFees += 0.50;
+            TotalRevenue += 0.50;
+            return true;
+        }
+        return false;
+    }
+        
+    public boolean returnOne() { //Simulates returning a book. No fee is charged.
+        if (canReturn()) {
+            TotalReturns++;
+            borrowedCount--;
+            numReturns++;
+            return true;
+        }
+        return false;
+    }
     
+    public void displayStatistics() { //Prints the member’s session statistics.
+        System.out.println("You have borrowed: " + borrowedCount + " books");
+        System.out.println("You have viewed your borrowed count: " + numViewBorrowed + " times");
+        System.out.println("You have borrowed books: " + numBorrows + " times");
+        System.out.println("You have returned books: " + numReturns + " times");
+        System.out.println("Your session fees: " + sessionFees);
+    }
     
-    
+    public void  reset() { //Resets the statistics to zero.
+        numViewBorrowed = 0;
+        numBorrows = 0;
+        numReturns = 0;
+        sessionFees = 0.0;
+    }
+
+    public int idGetter() {
+        return id;
+    }
+
+    public String nameGetter() {
+        return name;
+    }
+
+    public int borrowedCountGetter() {
+        return borrowedCount;
+    }
 
 }
-
